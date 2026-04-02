@@ -12,5 +12,10 @@ tested with Tampermonkey and firefox/chrome
 only support Japanese locale, you could patch code but i wont maintain for now
 ### how it works
 it greps for at least two some known text or icon patterns and removes the common parent
+### limitations
+* in some cases ai overviews is visible for some frames
+* in some cases whole page will be hidden temporarily
+* may break in future if not updated when google updates site
+* it only removes the texts, it doesnt fix up padding
 ### license
 GLWTPL
