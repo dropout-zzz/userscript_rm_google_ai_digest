@@ -49,20 +49,10 @@
     return null;
   }
 
-  function getTitle() {
+  function findDivText(txt) {
     const all = document.getElementsByTagName("div");
     for (let i = 0; i < all.length; i++) {
-      if (all[i].textContent === "AI による概要") {
-        return all[i];
-      }
-    }
-    return null;
-  }
-
-  function getWarn() {
-    const all = document.getElementsByTagName("div");
-    for (let i = 0; i < all.length; i++) {
-      if (all[i].textContent === "AI は不正確な情報を表示することがあるため、生成された回答を再確認するようにしてください") {
+      if (all[i].textContent === txt) {
         return all[i];
       }
     }
@@ -97,9 +87,7 @@
   function findCommonParent2(a, b) {
     let p = a;
     while (p) {
-      if (p.contains(b)) {
-        return p;
-      }
+      if (p.contains(b)) { return p; }
       p = p.parentElement;
     }
     return null;
@@ -108,9 +96,7 @@
   function findCommonParent3(a, b, c) {
     let p = a;
     while (p) {
-      if (p.contains(b) && p.contains(c)) {
-        return p;
-      }
+      if (p.contains(b) && p.contains(c)) { return p; }
       p = p.parentElement;
     }
     return null;
@@ -140,7 +126,7 @@
 
   function tryRemove() {
     const m = getMark();
-    const t = getTitle();
+    const t = findDivText('AI による概要');
     const i = getIcon();
 
     // main path
@@ -154,7 +140,7 @@
     }
 
     // fallback path
-    const w = getWarn();
+    const w = findDivText('AI は不正確な情報を表示することがあるため、生成された回答を再確認するようにしてください');
     if (t && w) {
       const p = findCommonParent2(t, w);
       if (p) {
