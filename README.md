@@ -17,5 +17,11 @@ it greps for at least two some known text or icon patterns and removes the commo
 * in some cases whole page will be hidden temporarily
 * may break in future if not updated when google updates site
 * it only removes the texts, it doesnt fix up padding
+### bonus: why this is still not possible to turn off in settings
+maybe google also knows it sucks, so it dont want you to turn it off
+
+like if you disabled now u cant see future improvements of this thing
+
+but they have to ship right now
 ### license
 GLWTPL
