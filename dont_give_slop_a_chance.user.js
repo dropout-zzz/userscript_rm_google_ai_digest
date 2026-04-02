@@ -116,6 +116,28 @@
     return null;
   }
 
+  let hidden = false;
+
+  function setPageHidden(v) {
+    if (!document.documentElement) return;
+
+    if (v === hidden) return;
+    hidden = v;
+
+    const el = document.documentElement;
+
+    // smooth animation
+    el.style.transition = "opacity 0.25s ease-in-out";
+
+    if (v) {
+      el.style.opacity = "0";
+    } else {
+      setTimeout(() => {
+        el.style.opacity = "";
+      }, 1500); // add small delay to prevent bad flickering
+    }
+  }
+
   function tryRemove() {
     const m = getMark();
     const t = getTitle();
@@ -126,6 +148,7 @@
       const p = findCommonParent3(m, t, i);
       if (p) {
         p.remove();
+        setPageHidden(false);
         return;
       }
     }
@@ -136,9 +159,17 @@
       const p = findCommonParent2(t, w);
       if (p) {
         p.remove();
+        setPageHidden(false);
         return;
       }
     }
+
+    // disclaimer text is loaded much later,
+    // this prevent showing slop before we can remove it.
+    //
+    // also, google sometimes show the title but later realizes no
+    // overview available and hides it again, this should handle the case.
+    setPageHidden(isVisible(t));
 
     // debug case
     if (m && (!t || !i)) {
