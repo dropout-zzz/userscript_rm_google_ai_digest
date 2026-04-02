@@ -6,7 +6,8 @@
 // @description  return clean exp when looking up jpn word on Google
 // @match        https://www.google.com/search?*
 // @run-at       document-start
-// @grant        none
+// @grant        GM_getValue
+// @grant        GM_setValue
 // ==/UserScript==
 
 (function () {
@@ -124,6 +125,41 @@
     }
   }
 
+  function loadStat() {
+    return GM_getValue("stat", {
+      total: 0,
+      main: 0,
+      fallback: 0
+    });
+  }
+
+  function saveStat(s) {
+    GM_setValue("stat", s);
+  }
+
+  function bump(kind) {
+    const s = loadStat();
+
+    s.total++;
+
+    if (kind === "main") s.main++;
+    if (kind === "fallback") s.fallback++;
+
+    // check every 50 successful runs
+    if (s.total >= 50) {
+      if (s.main === 0) {
+        alert("dropout: fallback used but main never touched");
+      }
+
+      // reset
+      s.total = 0;
+      s.main = 0;
+      s.fallback = 0;
+    }
+
+    saveStat(s);
+  }
+
   let warned = false;
 
   function tryRemove() {
@@ -137,6 +173,7 @@
       if (p) {
         p.remove();
         setPageHidden(false);
+        bump("main");
         return;
       }
     }
@@ -148,6 +185,7 @@
       if (p) {
         p.remove();
         setPageHidden(false);
+        bump("fallback");
         return;
       }
     }
