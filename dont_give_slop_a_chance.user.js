@@ -124,6 +124,8 @@
     }
   }
 
+  let warned = false;
+
   function tryRemove() {
     const m = getMark();
     const t = findDivText('AI による概要');
@@ -159,7 +161,10 @@
 
     // debug case
     if (m && (!t || !i)) {
-      alert("dropout: mark found but missing title or icon");
+      if (!warned) {
+        warned = true;
+        alert("dropout: mark found but missing title or icon");
+      }
     }
   }
 
