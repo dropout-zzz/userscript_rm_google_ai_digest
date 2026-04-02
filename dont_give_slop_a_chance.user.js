@@ -16,6 +16,8 @@
   // the highlighted text
   const markReLight = /^linear-gradient\(90deg, rgb\(211, 227, 253\) 50%, rgba\(0, 0, 0, 0\) 50%\) \d{1,2}(\.\d+)?% 0px \/ 200% 100% no-repeat$/;
   const markReDark = /^linear-gradient\(90deg, rgb\(52, 69, 127\) 50%, rgba\(0, 0, 0, 0\) 50%\) \d{1,2}(\.\d+)?% 0px \/ 200% 100% no-repeat$/;
+  const markChromeLight = /^rgba\(0, 0, 0, 0\) linear-gradient\(90deg, rgb\(211, 227, 253\) 50%, rgba\(0, 0, 0, 0\) 50%\) no-repeat scroll \d{1,2}(\.\d+)?% 0px \/ 200% 100% padding-box border-box$/;
+  const markChromeDark = /^rgba\(0, 0, 0, 0\) linear-gradient\(90deg, rgb\(52, 69, 127\) 50%, rgba\(0, 0, 0, 0\) 50%\) no-repeat scroll \d{1,2}(\.\d+)?% 0px \/ 200% 100% padding-box border-box$/;
 
   // the ✦ icon
   const pathD = "M235.5 471C235.5 438.423 229.22 407.807 216.66 379.155C204.492 350.503 187.811 325.579 166.616 304.384C145.421 283.189 120.498 266.508 91.845 254.34C63.1925 241.78 32.5775 235.5 0 235.5C32.5775 235.5 63.1925 229.416 91.845 217.249C120.498 204.689 145.421 187.811 166.616 166.616C187.811 145.421 204.492 120.497 216.66 91.845C229.22 63.1925 235.5 32.5775 235.5 0C235.5 32.5775 241.584 63.1925 253.751 91.845C266.311 120.497 283.189 145.421 304.384 166.616C325.579 187.811 350.503 204.689 379.155 217.249C407.807 229.416 438.423 235.5 471 235.5C438.423 235.5 407.807 241.78 379.155 254.34C350.503 266.508 325.579 283.189 304.384 304.384C283.189 325.579 266.311 350.503 253.751 379.155C241.584 407.807 235.5 438.423 235.5 471Z";
@@ -33,7 +35,10 @@
     return true;
   }
 
+  const isChrome = navigator.userAgent.includes("Chrome");
+
   function getMark() {
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const list = document.getElementsByTagName("mark");
     for (let i = 0; i < list.length; i++) {
       const el = list[i];
@@ -43,7 +48,12 @@
       if (!isVisible(el)) continue;
 
       const bg = getComputedStyle(el).background;
-      if (markReLight.test(bg) || markReDark.test(bg)) {
+      if (
+        (!isChrome && !isDark && markReLight.test(bg)) ||
+        (!isChrome && isDark && markReDark.test(bg)) ||
+        (isChrome && !isDark && markChromeLight.test(bg)) ||
+        (isChrome && isDark && markChromeDark.test(bg))
+      ) {
         return el;
       }
     }
@@ -179,7 +189,18 @@
     }
 
     // fallback path
-    const w = findDivText('AI は不正確な情報を表示することがあるため、生成された回答を再確認するようにしてください');
+
+    const disclaimerTexts = [
+      'AI は不正確な情報を表示することがあるため、生成された回答を再確認するようにしてください',
+      'これは情報提供のみを目的としています。医学的なアドバイスや診断については、専門家にご相談ください。AI の回答には間違いが含まれている場合があります。 詳細'
+    ];
+
+    let w = null;
+    for (let j = 0; j < disclaimerTexts.length; j++) {
+      w = findDivText(disclaimerTexts[j]);
+      if (w) break;
+    }
+
     if (t && w) {
       const p = findCommonParent2(t, w);
       if (p) {
