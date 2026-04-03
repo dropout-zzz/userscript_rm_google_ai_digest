@@ -23,7 +23,7 @@ it greps for at least two some known text or icon patterns and removes the commo
 * it only removes the texts, it doesnt fix up padding
 ### todo
 - [ ] test on safari/webkit-based browsers
-- [ ] also block AI-generated "People Also Ask" answers
+- [x] ~~also block AI-generated "People Also Ask" answers~~ (EDIT: nvm, already works)
 - [ ] test on mobile firefox/chromium-based browsers
 - [ ] test other userscript managers
 ### bonus: why this is still not possible to turn off in settings
