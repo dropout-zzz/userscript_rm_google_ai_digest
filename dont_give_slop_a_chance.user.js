@@ -5,6 +5,7 @@
 // @author       ChatGPT
 // @description  return clean exp when looking up jpn word on Google
 // @match        https://www.google.com/search?*
+// @match        https://www.google.co.jp/search?*
 // @run-at       document-start
 // @grant        GM_getValue
 // @grant        GM_setValue
