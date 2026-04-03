@@ -35,7 +35,7 @@
     return true;
   }
 
-  const isChrome = navigator.userAgent.includes("Chrome");
+  const isChrome = navigator.userAgent.includes("Safari");
 
   function getMark() {
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
