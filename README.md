@@ -10,6 +10,10 @@ its much more effort for me to switch to another.
 tested with Tampermonkey and firefox/chrome (archlinux)
 
 only support Japanese locale, you could patch code but i wont maintain for now
+### disclaimers
+im not responsible for Google account bans but so far this haven't happened to me
+
+i dont know if it conflicts/breaks with other plugins/scripts
 ### how it works
 it greps for at least two some known text or icon patterns and removes the common parent
 ### limitations
