@@ -7,7 +7,7 @@ why dont u use other search engine?
 i still want benefits from personalized search results and so on.
 its much more effort for me to switch to another.
 ### what works
-tested with Tampermonkey and firefox/chrome
+tested with Tampermonkey and firefox/chrome (archlinux)
 
 only support Japanese locale, you could patch code but i wont maintain for now
 ### how it works
