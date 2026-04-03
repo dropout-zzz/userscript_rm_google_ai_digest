@@ -21,6 +21,7 @@ it greps for at least two some known text or icon patterns and removes the commo
 * in some cases whole page will be hidden temporarily
 * may break in future if not updated when google updates site
 * it only removes the texts, it doesnt fix up padding
+* when the script is outdated or in untested cases, it can accidentally remove innocent search results
 ### todo
 - [ ] test on safari/webkit-based browsers
 - [x] ~~also block AI-generated "People Also Ask" answers~~ (EDIT: nvm, already works)
