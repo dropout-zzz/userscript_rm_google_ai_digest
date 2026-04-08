@@ -64,6 +64,41 @@
     return null;
   }
 
+  function hasToken(str, tok) {
+    const parts = str.split(/\s+/);
+    for (let i = 0; i < parts.length; i++) {
+      if (parts[i] === tok) return true;
+    }
+    return false;
+  }
+
+  function hasParent(el, tag) {
+    let p = el.parentElement;
+    while (p) {
+      if (p.tagName === tag) return true;
+      p = p.parentElement;
+    }
+    return false;
+  }
+
+  function getSpecialLink() {
+    const list = document.getElementsByTagName("a");
+    for (let i = 0; i < list.length; i++) {
+      const a = list[i];
+
+      if (!hasParent(a, "STRONG")) continue;
+
+      const cs = getComputedStyle(a);
+
+      if (!hasToken(cs.textDecorationLine, "underline")) continue;
+      if (cs.textDecorationStyle !== "dotted") continue;
+      if (cs.textDecorationThickness !== "8%") continue;
+
+      return a;
+    }
+    return null;
+  }
+
   function findDivText(txt) {
     const all = document.getElementsByTagName("div");
     for (let i = 0; i < all.length; i++) {
@@ -177,7 +212,12 @@
   let warned = false;
 
   function tryRemove() {
-    const m = getMark();
+    let m = getMark();
+
+    if (!m) {
+      m = getSpecialLink();
+    }
+
     const t = findDivText('AI による概要');
     const i = getIcon();
 
