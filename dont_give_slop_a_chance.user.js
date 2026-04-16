@@ -212,6 +212,19 @@
   let warned = false;
 
   function tryRemove() {
+    let content_placeholder = document.querySelector('#m-x-content');
+    let results_main = document.querySelectorAll("[role='main']")
+    if (content_placeholder && results_main.length == 1)
+    {
+        let main = results_main[0]
+        while (!content_placeholder.parentElement.contains(main))
+        {
+            content_placeholder = content_placeholder.parentNode;
+        }
+        content_placeholder.remove();
+        return;
+    }
+
     let m = getMark();
 
     if (!m) {
