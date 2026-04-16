@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Kill AI overviews (JP)
+// @name         Kill AI overviews (JP&EN)
 // @namespace    https://github.com/dropout-zzz/userscript_rm_google_ai_digest
 // @version      0.0.0
 // @author       ChatGPT
@@ -218,7 +218,7 @@
       m = getSpecialLink();
     }
 
-    const t = findDivText('AI による概要');
+    const t = findDivText('AI による概要') || findDivText('AI Overview');
     const i = getIcon();
 
     // main path
@@ -238,7 +238,8 @@
       'AI は不正確な情報を表示することがあるため、生成された回答を再確認するようにしてください',
       'これは情報提供のみを目的としています。医学的なアドバイスや診断については、専門家にご相談ください。AI の回答には間違いが含まれている場合があります。 詳細',
       'AI の回答には間違いが含まれている場合があります。法的なアドバイスについては、専門家にご相談ください。 詳細',
-      'AI の回答には間違いが含まれている場合があります。金融に関するアドバイスについては、専門家にご相談ください。 詳細'
+      'AI の回答には間違いが含まれている場合があります。金融に関するアドバイスについては、専門家にご相談ください。 詳細',
+      'This is for informational purposes only. For medical advice or diagnosis, consult a professional. AI responses may include mistakes. Learn more'
     ];
 
     let w = null;
