@@ -134,6 +134,20 @@
     return null;
   }
 
+  function getMoreBtn() {
+    const list = document.getElementsByTagName("div");
+    for (let i = 0; i < list.length; i++) {
+      const el = list[i];
+
+      if (el.getAttribute("role") !== "button") continue;
+      if (el.textContent !== "もっと見る") continue;
+      if (el.getAttribute("aria-label") !== "その他の AI による概要を表示") continue;
+
+      return el;
+    }
+    return null;
+  }
+
   function findCommonParent2(a, b) {
     let p = a;
     while (p) {
@@ -241,10 +255,12 @@
       'AI の回答には間違いが含まれている場合があります。金融に関するアドバイスについては、専門家にご相談ください。 詳細'
     ];
 
-    let w = null;
-    for (let j = 0; j < disclaimerTexts.length; j++) {
-      w = findDivText(disclaimerTexts[j]);
-      if (w) break;
+    let w = getMoreBtn();
+    if (!w) {
+      for (let j = 0; j < disclaimerTexts.length; j++) {
+        w = findDivText(disclaimerTexts[j]);
+        if (w) break;
+      }
     }
 
     if (t && w) {
