@@ -16,6 +16,8 @@ im not responsible for Google account bans but so far this haven't happened to m
 i dont know if it conflicts/breaks with other plugins/scripts
 ### how it works
 it greps for at least two some known text, visual CSS stuff or icon patterns and removes the common parent
+
+philosophy of this implementation is: try to depend on as little as possible about internal details of google's webpage.
 ### limitations
 * in some cases ai overviews is visible for some frames
 * in some cases whole page will be hidden temporarily
