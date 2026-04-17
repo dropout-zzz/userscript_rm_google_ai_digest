@@ -15,7 +15,7 @@ im not responsible for Google account bans but so far this haven't happened to m
 
 i dont know if it conflicts/breaks with other plugins/scripts
 ### how it works
-it greps for at least two some known text or icon patterns and removes the common parent
+it greps for at least two some known text, visual CSS stuff or icon patterns and removes the common parent
 ### limitations
 * in some cases ai overviews is visible for some frames
 * in some cases whole page will be hidden temporarily
