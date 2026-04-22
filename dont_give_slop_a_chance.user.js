@@ -166,6 +166,17 @@
     return null;
   }
 
+  function findCommonParent4(a, b, c, d) {
+    let p = a;
+    while (p) {
+      if (p.contains(b) && p.contains(c) && p.contains(d)) {
+        return p;
+      }
+      p = p.parentElement;
+    }
+    return null;
+  }
+
   let hidden = false;
 
   function setPageHidden(v) {
@@ -235,9 +246,11 @@
     const t = findDivText('AI による概要');
     const i = getIcon();
 
+    let w = getMoreBtn();
+
     // main path
     if (m && t && i) {
-      const p = findCommonParent3(m, t, i);
+      const p = w ? findCommonParent4(m, t, i, w) : findCommonParent3(m, t, i);
       if (p) {
         p.remove();
         setPageHidden(false);
@@ -255,7 +268,6 @@
       'AI の回答には間違いが含まれている場合があります。金融に関するアドバイスについては、専門家にご相談ください。 詳細'
     ];
 
-    let w = getMoreBtn();
     if (!w) {
       for (let j = 0; j < disclaimerTexts.length; j++) {
         w = findDivText(disclaimerTexts[j]);
