@@ -268,11 +268,13 @@
       'AI の回答には間違いが含まれている場合があります。金融に関するアドバイスについては、専門家にご相談ください。 詳細'
     ];
 
+    for (let j = 0; j < disclaimerTexts.length; j++) {
+      w = findDivText(disclaimerTexts[j]);
+      if (w) break;
+    }
+
     if (!w) {
-      for (let j = 0; j < disclaimerTexts.length; j++) {
-        w = findDivText(disclaimerTexts[j]);
-        if (w) break;
-      }
+      w = getMoreBtn();
     }
 
     if (t && w) {
