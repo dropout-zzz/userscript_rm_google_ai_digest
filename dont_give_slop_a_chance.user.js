@@ -273,7 +273,7 @@
       if (w) break;
     }
 
-    if (!w) {
+    if (!w && i) {
       w = getMoreBtn();
     }
 
