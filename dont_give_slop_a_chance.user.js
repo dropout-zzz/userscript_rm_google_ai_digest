@@ -34,9 +34,9 @@
 
   const isChrome = navigator.userAgent.includes("Safari");
 
-  function getMark() {
+  function getMarkInternal(tagname) {
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const list = document.getElementsByTagName("mark");
+    const list = document.getElementsByTagName(tagname);
     for (let i = 0; i < list.length; i++) {
       const el = list[i];
 
@@ -55,6 +55,14 @@
       }
     }
     return null;
+  }
+
+  function getMark() {
+    let el = getMarkInternal("mark");
+    if (!el) {
+      el = getMarkInternal("b");
+    }
+    return el;
   }
 
   function hasToken(str, tok) {
