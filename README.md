@@ -10,6 +10,9 @@ its much more effort for me to switch to another.
 tested with Tampermonkey and firefox/chrome (archlinux)
 
 only support Japanese locale, you could patch code but i wont maintain for now
+### what dont currently work
+* cannot yet detect some "People Also Ask" answers, which has no underlined link, highlighted text or disclaimer text
+* cannot remove titles of ai-generated "People Also Ask" answers
 ### disclaimers
 im not responsible for Google account bans but so far this haven't happened to me
 
@@ -24,7 +27,6 @@ philosophy of this implementation is: try to depend on as little as possible abo
 * may break in future if not updated when google updates site
 * it only removes the texts, it doesnt fix up padding
 * when the script is outdated or in untested cases, it can accidentally remove innocent search results
-* cannot remove titles of ai-generated "People Also Ask" answers
 ### todo
 - [ ] test on safari/webkit-based browsers
 - [x] ~~also block AI-generated "People Also Ask" answers~~ (EDIT: nvm, already works)
