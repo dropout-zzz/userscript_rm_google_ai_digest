@@ -150,6 +150,20 @@
     return null;
   }
 
+  function getMoreBtn() {
+    const list = document.getElementsByTagName("div");
+    for (let i = 0; i < list.length; i++) {
+      const el = list[i];
+
+      if (el.getAttribute("role") !== "button") continue;
+      if (el.textContent !== "もっと見る") continue;
+      if (el.getAttribute("aria-label") !== "その他の AI による概要を表示") continue;
+
+      return el;
+    }
+    return null;
+  }
+
   function findCommonParent(a, b) {
     let p = a;
     while (p) {
@@ -220,13 +234,17 @@
 
   function tryRemove() {
     let m = getMark();
+    const b = getMoreBtn();
+    const t = findDivText('AI による概要');
+    const i = getIcon();
 
     if (!m) {
       m = getSpecialLink();
     }
 
-    const t = findDivText('AI による概要');
-    const i = getIcon();
+    if (!m && i) {
+      m = b;
+    }
 
     // main path
     if (m && t) {
