@@ -240,7 +240,7 @@
       m = getSpecialLink();
     }
 
-    if (!m && i) {
+    if (b && i) {
       m = b;
     }
 
