@@ -102,9 +102,17 @@
   function findDivText(txt) {
     const all = document.getElementsByTagName("div");
     for (let i = 0; i < all.length; i++) {
-      if (all[i].textContent === txt) {
-        return all[i];
+      const el = all[i];
+
+      if (all[i].textContent !== txt) {
+        continue;
       }
+
+      if (!isVisible(el)) {
+        continue;
+      }
+
+      return el;
     }
     return null;
   }
