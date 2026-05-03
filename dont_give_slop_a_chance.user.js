@@ -142,19 +142,10 @@
     return null;
   }
 
-  function findCommonParent2(a, b) {
+  function findCommonParent(a, b) {
     let p = a;
     while (p) {
       if (p.contains(b)) { return p; }
-      p = p.parentElement;
-    }
-    return null;
-  }
-
-  function findCommonParent3(a, b, c) {
-    let p = a;
-    while (p) {
-      if (p.contains(b) && p.contains(c)) { return p; }
       p = p.parentElement;
     }
     return null;
@@ -230,8 +221,8 @@
     const i = getIcon();
 
     // main path
-    if (m && t && i) {
-      const p = findCommonParent3(m, t, i);
+    if (m && t) {
+      const p = findCommonParent(m, t);
       if (p) {
         p.remove();
         setPageHidden(false);
@@ -256,7 +247,7 @@
     }
 
     if (t && w) {
-      const p = findCommonParent2(t, w);
+      const p = findCommonParent(t, w);
       if (p) {
         p.remove();
         setPageHidden(false);
