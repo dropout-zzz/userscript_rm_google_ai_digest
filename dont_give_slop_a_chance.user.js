@@ -230,8 +230,6 @@
     saveStat(s);
   }
 
-  let warned = false;
-
   function tryRemove() {
     let m = getMark();
     const b = getMoreBtn();
@@ -288,14 +286,6 @@
     // also, google sometimes show the title but later realizes no
     // overview available and hides it again, this should handle the case.
     setPageHidden(isVisible(t));
-
-    // debug case
-    if (m && (!t || !i)) {
-      if (!warned) {
-        warned = true;
-        alert("dropout: mark found but missing title or icon");
-      }
-    }
   }
 
   function startObs() {
